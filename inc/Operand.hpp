@@ -19,7 +19,7 @@ template<typename T>
 class Operand : public IOperand
 {
 public:
-	Operand();
+	Operand(T value);
 	virtual ~Operand();
 
 	virtual std::string const & toString();
@@ -43,72 +43,84 @@ private:
 	IOperand*	createDouble(const std::string & value);
 
 private:
+	std::string		_raw;
 	T					_val;
 	eOperandType	_type;
 };
 
 template <typename T>
-Operand::Operand()
+Operand<T>::Operand(T value)
+	: _val(value)
 {
 }
 
 template <typename T>
-Operand::~Operand()
+Operand<T>::~Operand()
 {
 }
 
 template <typename T>
-std::string const & Operand::toString()
+std::string const & Operand<T>::toString()
 {
-	stringstream ss;
+	std::stringstream ss;
 	ss << _val;
-	return (ss.str());
+	_raw = ss.str();
+	return (_raw);
 }
 
 template <typename T>
-int Operand::getPrecision()
+int Operand<T>::getPrecision()
 {
 	return (_type);
 }
 
 template <typename T>
-eOperandType Operand::getType()
+eOperandType Operand<T>::getType()
 {
 	return (_type);
 }
 
 template <typename T>
-IOperand*	Operand::operator+(const IOperand & rhs)
+IOperand*	Operand<T>::operator+(const IOperand & rhs)
 {
+	(void)rhs;
+	return (NULL);
+}
+
+template <typename T>
+IOperand*	Operand<T>::operator-(const IOperand & rhs)
+{
+	(void)rhs;
+	return (NULL);
 
 }
 
 template <typename T>
-IOperand*	Operand::operator-(const IOperand & rhs)
+IOperand*	Operand<T>::operator*(const IOperand & rhs)
 {
+	(void)rhs;
+	return (NULL);
 
 }
 
 template <typename T>
-IOperand*	Operand::operator*(const IOperand & rhs)
+IOperand*	Operand<T>::operator/(const IOperand & rhs)
 {
+	(void)rhs;
+	return (NULL);
 
 }
 
 template <typename T>
-IOperand*	Operand::operator/(const IOperand & rhs)
+IOperand*	Operand<T>::operator%(const IOperand & rhs)
 {
+	(void)rhs;
+	return (NULL);
 
 }
 
 template <typename T>
-IOperand*	Operand::operator%(const IOperand & rhs)
-{
-
-}
-
-template <typename T>
-IOperand*		Operand::createOperand(const std::string & value)
+IOperand*		Operand<T>::createOperand(const std::string & value)
 {
 	IOperand*	(Operand::*creators[5])(const std::string &);
 
@@ -119,9 +131,9 @@ IOperand*		Operand::createOperand(const std::string & value)
 	creators[Double] = &Operand::createDouble;
 
 	/* Getting values */
-	long				vI;
-	double			vD;
-	stringstream	ss;
+	long					vI;
+	double				vD;
+	std::stringstream	ss;
 	ss = value;
 	ss >> vI;
 	ss >> vD;
@@ -132,41 +144,51 @@ IOperand*		Operand::createOperand(const std::string & value)
 		return (this->*creators[Int16](value));
 	else if (vD == vI && vI >= LONG_MIN && vI <= LONG_MAX)
 		return (this->*creators[Int32](value));
-	else if (vD != vI && value.size() - value.find(".") <= 6)
+	else if (vD != vI && value.size() - value.find(".") + 1 <= 6)
 		return (this->*creators[Float](value));
-	else if (vD != vI && value.size() - value.find(".") > 6)
+	else if (vD != vI && value.size() - value.find(".") + 1 > 6)
 		return (this->*creators[Double](value));
 	else
 		throw TypeException("Invalid type");
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::createInt8(const std::string & value)
+IOperand*	Operand<T>::createInt8(const std::string & value)
 {
-
+	(void)value;
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::createInt16(const std::string & value)
+IOperand*	Operand<T>::createInt16(const std::string & value)
 {
-
-}
-
-template <typename T>
-IOperand*	Operand::createInt32(const std::string & value)
-{
-
-}
-
-template <typename T>
-IOperand*	Operand::createFloat(const std::string & value)
-{
+	(void)value;
+	return (NULL);
 
 }
 
 template <typename T>
-IOperand*	Operand::createDouble(const std::string & value)
+IOperand*	Operand<T>::createInt32(const std::string & value)
 {
+	(void)value;
+	return (NULL);
+
+}
+
+template <typename T>
+IOperand*	Operand<T>::createFloat(const std::string & value)
+{
+	(void)value;
+	return (NULL);
+
+}
+
+template <typename T>
+IOperand*	Operand<T>::createDouble(const std::string & value)
+{
+	(void)value;
+	return (NULL);
 
 }
 

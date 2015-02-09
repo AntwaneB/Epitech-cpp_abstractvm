@@ -20,7 +20,7 @@ public:
 
 	}
 
-	virtual ~TypeException() throw {}
+	virtual ~TypeException() throw() {}
 
 	virtual const char*	what() const throw()
 	{
