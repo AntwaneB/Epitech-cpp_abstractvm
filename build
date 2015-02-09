@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ $# = 0 ]; then
+
+    make -s && make clean -s \
+    && ./abstractvm \
+    && make fclean -s
+
+else
+
+    make -s && make clean -s \
+    && ./abstractvm examples/$1.avm \
+    && make fclean -s
+
+fi

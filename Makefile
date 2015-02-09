@@ -28,7 +28,7 @@ INCS		  =  App.hpp
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
 CFLAGS		  += -I./inc
-CFLAGS		  += -Wall -Wextra -W -Werror -g
+CFLAGS		  += -Wall -Wextra -W -Werror
 
 $(NAME):	     $(OBJS)
 		     $(CC) $(OBJS) $(CFLAGS) -o $(NAME)
@@ -48,4 +48,3 @@ fclean:		     clean
 re:		     fclean all
 
 .PHONY: re fclean clean all
-.SILENT:
