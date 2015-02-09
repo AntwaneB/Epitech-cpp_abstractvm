@@ -23,13 +23,13 @@ public:
 	virtual int getPrecision();
 	virtual eOperandType getType();
 
-	virtual IOperand*	operator+(const IOperand &rhs);
-	virtual IOperand*	operator-(const IOperand &rhs);
-	virtual IOperand*	operator*(const IOperand &rhs);
-	virtual IOperand*	operator/(const IOperand &rhs);
-	virtual IOperand*	operator%(const IOperand &rhs);
+	virtual IOperand*	operator+(const IOperand & rhs);
+	virtual IOperand*	operator-(const IOperand & rhs);
+	virtual IOperand*	operator*(const IOperand & rhs);
+	virtual IOperand*	operator/(const IOperand & rhs);
+	virtual IOperand*	operator%(const IOperand & rhs);
 
-	IOperand*	
+	IOperand*	createOperand(const std::string & value)
 
 private:
 	IOperand*	createInt8(const std::string & value);
