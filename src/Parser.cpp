@@ -16,6 +16,6 @@ Parser::~Parser()
 {
 }
 
-void	Parser::Parse(std::std::vector<std::string> v)
+void	Parser::Parse(std::vector<std::string> v)
 {
 }
