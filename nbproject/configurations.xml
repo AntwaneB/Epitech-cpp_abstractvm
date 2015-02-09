@@ -4,8 +4,12 @@
     <df root="." name="0">
       <df name="inc">
         <in>IOperand.hpp</in>
+        <in>Operand.hpp</in>
       </df>
       <df name="src">
+        <in>Operand.cpp</in>
+        <in>Parser.cpp</in>
+        <in>Parser.hpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -39,6 +43,14 @@
         </makeTool>
       </makefileType>
       <item path="inc/IOperand.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="inc/Operand.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Operand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Parser.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
       </item>
