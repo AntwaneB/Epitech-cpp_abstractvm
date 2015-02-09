@@ -15,6 +15,7 @@
 #include <sstream>
 #include "Parser.hpp"
 #include "App.hpp"
+#include "Parser.hpp"
 
 App::App(int ac, char** av)
 	: _ac(ac), _av(av)
@@ -29,7 +30,7 @@ App::~App()
 int	App::run()
 {
 	std::ifstream					ofs;
-	std::vector<std::string> 	vector;
+	std::vector<std::string> 		vector;
 	std::string 					save;
 	int								i;
 
@@ -42,22 +43,22 @@ int	App::run()
 			vector.push_back(save);
 		}
 		if (save == ";;")
-			Parser(vector);
+			Parser::parse(vector);
 	}
 	else
 	{
 		while (i < _ac)
-			{
+		{
 			ofs.open(_av[i]);
 			if (ofs.is_open())
-				{
+			{
 				for(std::string line; getline(ofs, line);)
 					vector.push_back(line);
-				Parser(vector);
+				Parser::parse(vector);
 				ofs.close();
-				}
-		i++;
+			}
+			i++;
+		}
 	}
-}
-return (0);
+	return (0);
 }
