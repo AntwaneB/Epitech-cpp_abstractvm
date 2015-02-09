@@ -19,19 +19,20 @@ template<typename T>
 class Operand : public IOperand
 {
 public:
-	Operand();
+	Operand(eOperandType type, T value);
 	virtual ~Operand();
 
-	virtual std::string const & toString();
+	virtual std::string const &	toString() const;
 
-	virtual int getPrecision();
-	virtual eOperandType getType();
+	virtual int				getPrecision() const;
+	virtual eOperandType	getType() const;
+	T							getValue();
 
-	virtual IOperand*	operator+(const IOperand & rhs);
-	virtual IOperand*	operator-(const IOperand & rhs);
-	virtual IOperand*	operator*(const IOperand & rhs);
-	virtual IOperand*	operator/(const IOperand & rhs);
-	virtual IOperand*	operator%(const IOperand & rhs);
+	virtual IOperand*	operator+(const IOperand & rhs) const;
+	virtual IOperand*	operator-(const IOperand & rhs) const;
+	virtual IOperand*	operator*(const IOperand & rhs) const;
+	virtual IOperand*	operator/(const IOperand & rhs) const;
+	virtual IOperand*	operator%(const IOperand & rhs) const;
 
 	IOperand*	createOperand(const std::string & value);
 
@@ -43,72 +44,290 @@ private:
 	IOperand*	createDouble(const std::string & value);
 
 private:
+	std::string		_raw;
 	T					_val;
 	eOperandType	_type;
 };
 
 template <typename T>
-Operand::Operand()
+Operand<T>::Operand(eOperandType type, T value)
+	: _type(type), _val(value)
 {
-}
-
-template <typename T>
-Operand::~Operand()
-{
-}
-
-template <typename T>
-std::string const & Operand::toString()
-{
-	stringstream ss;
+	std::stringstream ss;
 	ss << _val;
-	return (ss.str());
+	_raw = ss.str();
 }
 
 template <typename T>
-int Operand::getPrecision()
+Operand<T>::~Operand()
+{
+}
+
+template <typename T>
+std::string const & Operand<T>::toString() const
+{
+	return (_raw);
+}
+
+template <typename T>
+int Operand<T>::getPrecision() const
 {
 	return (_type);
 }
 
 template <typename T>
-eOperandType Operand::getType()
+eOperandType Operand<T>::getType() const
 {
 	return (_type);
 }
 
 template <typename T>
-IOperand*	Operand::operator+(const IOperand & rhs)
+IOperand*	Operand<T>::operator+(const IOperand & rhs) const
 {
+	eOperandType	type = rhs.getType() > _type ? rhs.getType() : _type;
 
+	if (type == Double || type == Float)
+	{
+		double v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v + _val));
+		else if (type == Float)
+			return (new Operand<float>(v + _val));
+		else if (type == Int32 || (type < Int32 && (v + _val > INT_MAX || v + _val < INT_MIN)))
+			return (new Operand<long>(v + _val));
+		else if (type == Int16 || (type < Int16 && (v + _val > SHRT_MAX || v + _val < SHRT_MIN)))
+			return (new Operand<int>(v + _val));
+		else if (type == Int8)
+			return (new Operand<short>(v + _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+	else
+	{
+		long v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v + _val));
+		else if (type == Float)
+			return (new Operand<float>(v + _val));
+		else if (type == Int32 || (type < Int32 && (v + _val > INT_MAX || v + _val < INT_MIN)))
+			return (new Operand<long>(v + _val));
+		else if (type == Int16 || (type < Int16 && (v + _val > SHRT_MAX || v + _val < SHRT_MIN)))
+			return (new Operand<int>(v + _val));
+		else if (type == Int8)
+			return (new Operand<short>(v + _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::operator-(const IOperand & rhs)
+IOperand*	Operand<T>::operator-(const IOperand & rhs) const
 {
+	eOperandType	type = rhs.getType() > _type ? rhs.getType() : _type;
 
+	if (type == Double || type == Float)
+	{
+		double v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v - _val));
+		else if (type == Float)
+			return (new Operand<float>(v - _val));
+		else if (type == Int32 || (type < Int32 && (v - _val > INT_MAX || v - _val < INT_MIN)))
+			return (new Operand<long>(v - _val));
+		else if (type == Int16 || (type < Int16 && (v - _val > SHRT_MAX || v - _val < SHRT_MIN)))
+			return (new Operand<int>(v - _val));
+		else if (type == Int8)
+			return (new Operand<short>(v - _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+	else
+	{
+		long v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v - _val));
+		else if (type == Float)
+			return (new Operand<float>(v - _val));
+		else if (type == Int32 || (type < Int32 && (v - _val > INT_MAX || v - _val < INT_MIN)))
+			return (new Operand<long>(v - _val));
+		else if (type == Int16 || (type < Int16 && (v - _val > SHRT_MAX || v - _val < SHRT_MIN)))
+			return (new Operand<int>(v - _val));
+		else if (type == Int8)
+			return (new Operand<short>(v - _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::operator*(const IOperand & rhs)
+IOperand*	Operand<T>::operator*(const IOperand & rhs) const
 {
+	eOperandType	type = rhs.getType() > _type ? rhs.getType() : _type;
 
+	if (type == Double || type == Float)
+	{
+		double v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v * _val));
+		else if (type == Float)
+			return (new Operand<float>(v * _val));
+		else if (type == Int32 || (type < Int32 && (v * _val > INT_MAX || v * _val < INT_MIN)))
+			return (new Operand<long>(v * _val));
+		else if (type == Int16 || (type < Int16 && (v * _val > SHRT_MAX || v * _val < SHRT_MIN)))
+			return (new Operand<int>(v * _val));
+		else if (type == Int8)
+			return (new Operand<short>(v * _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+	else
+	{
+		long v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v * _val));
+		else if (type == Float)
+			return (new Operand<float>(v * _val));
+		else if (type == Int32 || (type < Int32 && (v * _val > INT_MAX || v * _val < INT_MIN)))
+			return (new Operand<long>(v * _val));
+		else if (type == Int16 || (type < Int16 && (v * _val > SHRT_MAX || v * _val < SHRT_MIN)))
+			return (new Operand<int>(v * _val));
+		else if (type == Int8)
+			return (new Operand<short>(v * _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::operator/(const IOperand & rhs)
+IOperand*	Operand<T>::operator/(const IOperand & rhs) const
 {
+	eOperandType	type = rhs.getType() > _type ? rhs.getType() : _type;
 
+	if (type == Double || type == Float)
+	{
+		double v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v / _val));
+		else if (type == Float)
+			return (new Operand<float>(v / _val));
+		else if (type == Int32 || (type < Int32 && (v / _val > INT_MAX || v / _val < INT_MIN)))
+			return (new Operand<long>(v / _val));
+		else if (type == Int16 || (type < Int16 && (v / _val > SHRT_MAX || v / _val < SHRT_MIN)))
+			return (new Operand<int>(v / _val));
+		else if (type == Int8)
+			return (new Operand<short>(v / _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+	else
+	{
+		long v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v / _val));
+		else if (type == Float)
+			return (new Operand<float>(v / _val));
+		else if (type == Int32 || (type < Int32 && (v / _val > INT_MAX || v / _val < INT_MIN)))
+			return (new Operand<long>(v / _val));
+		else if (type == Int16 || (type < Int16 && (v / _val > SHRT_MAX || v / _val < SHRT_MIN)))
+			return (new Operand<int>(v / _val));
+		else if (type == Int8)
+			return (new Operand<short>(v / _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::operator%(const IOperand & rhs)
+IOperand*	Operand<T>::operator%(const IOperand & rhs) const
 {
+	eOperandType	type = rhs.getType() > _type ? rhs.getType() : _type;
 
+	if (type == Double || type == Float)
+	{
+		double v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v % _val));
+		else if (type == Float)
+			return (new Operand<float>(v % _val));
+		else if (type == Int32 || (type < Int32 && (v % _val > INT_MAX || v % _val < INT_MIN)))
+			return (new Operand<long>(v % _val));
+		else if (type == Int16 || (type < Int16 && (v % _val > SHRT_MAX || v % _val < SHRT_MIN)))
+			return (new Operand<int>(v % _val));
+		else if (type == Int8)
+			return (new Operand<short>(v % _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+	else
+	{
+		long v;
+		std::stringstream	ss;
+		ss << rhs.toString();
+		ss >> v;
+
+		if (type == Double)
+			return (new Operand<double>(v % _val));
+		else if (type == Float)
+			return (new Operand<float>(v % _val));
+		else if (type == Int32 || (type < Int32 && (v % _val > INT_MAX || v % _val < INT_MIN)))
+			return (new Operand<long>(v % _val));
+		else if (type == Int16 || (type < Int16 && (v % _val > SHRT_MAX || v % _val < SHRT_MIN)))
+			return (new Operand<int>(v % _val));
+		else if (type == Int8)
+			return (new Operand<short>(v % _val));
+		else
+			throw TypeException("Invalid operand type");
+	}
+
+	return (NULL);
 }
 
 template <typename T>
-IOperand*		Operand::createOperand(const std::string & value)
+IOperand*		Operand<T>::createOperand(const std::string & value)
 {
 	IOperand*	(Operand::*creators[5])(const std::string &);
 
@@ -118,10 +337,9 @@ IOperand*		Operand::createOperand(const std::string & value)
 	creators[Float] = &Operand::createFloat;
 	creators[Double] = &Operand::createDouble;
 
-	/* Getting values */
-	long				vI;
-	double			vD;
-	stringstream	ss;
+	long					vI;
+	double				vD;
+	std::stringstream	ss;
 	ss = value;
 	ss >> vI;
 	ss >> vD;
@@ -132,42 +350,63 @@ IOperand*		Operand::createOperand(const std::string & value)
 		return (this->*creators[Int16](value));
 	else if (vD == vI && vI >= LONG_MIN && vI <= LONG_MAX)
 		return (this->*creators[Int32](value));
-	else if (vD != vI && value.size() - value.find(".") <= 6)
+	else if (vD != vI && value.size() - value.find(".") + 1 <= 6)
 		return (this->*creators[Float](value));
-	else if (vD != vI && value.size() - value.find(".") > 6)
+	else if (vD != vI && value.size() - value.find(".") + 1 > 6)
 		return (this->*creators[Double](value));
 	else
 		throw TypeException("Invalid type");
+	return (NULL);
 }
 
 template <typename T>
-IOperand*	Operand::createInt8(const std::string & value)
+IOperand*	Operand<T>::createInt8(const std::string & value)
 {
+	short					v;
+	std::stringstream	ss = value;
+	value >> v;
 
+	return (new Operand<short>(Int8, v));
 }
 
 template <typename T>
-IOperand*	Operand::createInt16(const std::string & value)
+IOperand*	Operand<T>::createInt16(const std::string & value)
 {
+	int					v;
+	std::stringstream	ss = value;
+	value >> v;
 
+	return (new Operand<int>(Int16, v));
 }
 
 template <typename T>
-IOperand*	Operand::createInt32(const std::string & value)
+IOperand*	Operand<T>::createInt32(const std::string & value)
 {
+	long					v;
+	std::stringstream	ss = value;
+	value >> v;
 
+	return (new Operand<long>(Int32, v));
 }
 
 template <typename T>
-IOperand*	Operand::createFloat(const std::string & value)
+IOperand*	Operand<T>::createFloat(const std::string & value)
 {
+	float					v;
+	std::stringstream	ss = value;
+	value >> v;
 
+	return (new Operand<float>(Float, v));
 }
 
 template <typename T>
-IOperand*	Operand::createDouble(const std::string & value)
+IOperand*	Operand<T>::createDouble(const std::string & value)
 {
+	double				v;
+	std::stringstream	ss = value;
+	value >> v;
 
+	return (new Operand<double>(Double, v));
 }
 
 

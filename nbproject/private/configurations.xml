@@ -16,6 +16,7 @@
       <df name="src">
         <in>App.cpp</in>
         <in>Parser.cpp</in>
+        <in>Parser.hpp</in>
         <in>main.cpp</in>
       </df>
     </df>
