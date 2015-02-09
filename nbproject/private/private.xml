@@ -7,4 +7,15 @@
         <activeConfTypeElem>0</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/src/Operand.cpp</file>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/src/App.cpp</file>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/inc/App.hpp</file>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/inc/IOperand.hpp</file>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/Makefile</file>
+            <file>file:/home/buchse_a/Projects/cpp_abstractvm/inc/Operand.hpp</file>
+        </group>
+    </open-files>
 </project-private>

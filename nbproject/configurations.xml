@@ -5,11 +5,13 @@
       <df name="inc">
         <in>IOperand.hpp</in>
         <in>Operand.hpp</in>
+        <in>Parser.hpp</in>
+        <in>TypeException.hpp</in>
       </df>
       <df name="src">
         <in>Operand.cpp</in>
         <in>Parser.cpp</in>
-        <in>Parser.hpp</in>
+        <in>TypeException.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -46,11 +48,15 @@
       </item>
       <item path="inc/Operand.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="inc/Parser.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="inc/TypeException.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Operand.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Parser.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/Parser.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/TypeException.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
       </item>

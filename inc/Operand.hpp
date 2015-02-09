@@ -29,7 +29,7 @@ public:
 	virtual IOperand*	operator/(const IOperand & rhs);
 	virtual IOperand*	operator%(const IOperand & rhs);
 
-	IOperand*	createOperand(const std::string & value)
+	IOperand*	createOperand(const std::string & value);
 
 private:
 	IOperand*	createInt8(const std::string & value);
@@ -39,7 +39,8 @@ private:
 	IOperand*	createDouble(const std::string & value);
 
 private:
-	T		_val;
+	T					_val;
+	eOperandType	_type;
 };
 
 #endif	/* OPERAND_HPP */

@@ -17,13 +17,19 @@ MKDIR		  =  mkdir -p
 
 SRCS_DIR	  =  src
 SRCS		  =  main.cpp \
-		     App.cpp
+		     App.cpp \
+		     Operand.cpp \
+		     Parser.cpp
 
 OBJS_DIR	  =  obj
 OBJS		  =  $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
 
 INCS_DIR	  =  inc
-INCS		  =  App.hpp
+INCS		  =  TypeException.hpp \
+		     App.hpp \
+		     IOperand.hpp \
+		     Operand.hpp \
+		     Parser.hpp
 
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
