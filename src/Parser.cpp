@@ -6,8 +6,10 @@
  */
 
 #include "Parser.hpp"
+#include "Operand.hpp"
 
-Parser::Parser() {
+Parser::Parser()
+{
 }
 
 Parser::~Parser() {

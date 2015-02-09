@@ -10,7 +10,9 @@
 
 #include <climits>
 #include <sstream>
+#include <iostream>
 #include <string>
+#include "TypeException.hpp"
 #include "IOperand.hpp"
 
 template<typename T>
@@ -125,15 +127,15 @@ IOperand*		Operand::createOperand(const std::string & value)
 	ss >> vD;
 
 	if (vD == vI && vI >= SHRT_MIN && vI <= SHRT_MAX)
-		return (this->createInt8(value));
+		return (this->*creators[Int8](value));
 	else if (vD == vI && vI >= INT_MIN && vI <= INT_MAX)
-		return (this->createInt16(value));
+		return (this->*creators[Int16](value));
 	else if (vD == vI && vI >= LONG_MIN && vI <= LONG_MAX)
-		return (this->createInt32(value));
-	else if (vD != vI && vD >= FLT_MIN && vD <= FLT_MAX)
-		return (this->createFloat(value));
-	else if (vD != vI && vD >= DBL_MIN && vD <= DBL_MAX)
-		return (this->createDouble(value));
+		return (this->*creators[Int32](value));
+	else if (vD != vI && value.size() - value.find(".") <= 6)
+		return (this->*creators[Float](value));
+	else if (vD != vI && value.size() - value.find(".") > 6)
+		return (this->*creators[Double](value));
 	else
 		throw TypeException("Invalid type");
 }
