@@ -8,13 +8,17 @@
 #ifndef PARSER_HPP
 #define	PARSER_HPP
 
+#include <vector>
+#include <list>
+#include "IOperand.hpp"
+
 class Parser {
 public:
-	Parser();
-	Parser(const Parser& orig);
-	virtual ~Parser();
+	static void	parse(std::vector<std::string>);
 private:
-	std::vector<std::string>	_content;
+	Parser();
+	virtual ~Parser();
+	std::list<IOperand*>			_operands;
 };
 
 #endif	/* PARSER_HPP */

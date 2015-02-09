@@ -12,6 +12,10 @@ Parser::Parser()
 {
 }
 
-Parser::~Parser() {
+Parser::~Parser()
+{
 }
 
+void	Parser::Parse(std::std::vector<std::string> v)
+{
+}

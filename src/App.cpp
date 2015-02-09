@@ -14,6 +14,7 @@
 #include <vector>
 #include <sstream>
 #include "App.hpp"
+#include "Parser.hpp"
 
 App::App(int ac, char** av)
 	: _ac(ac), _av(av)
@@ -41,7 +42,7 @@ if (_ac < 2)
 		vector.push_back(save);
 	}
 	if (save == ";;")
-		Parser(vector);
+		Parser::parse(vector);
 }
 else
 {
@@ -52,7 +53,7 @@ else
 			{
 			for(std::string line; getline(ofs, line);)
 				vector.push_back(line);
-			Parser(vector);
+			Parser::parse(vector);
 			ofs.close();
 			}
 		i++;
