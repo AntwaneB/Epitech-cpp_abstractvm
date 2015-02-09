@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Parser.hpp
  * Author: buchse_a
  *
