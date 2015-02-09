@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Parser.hpp
  * Author: buchse_a
  *
@@ -11,7 +11,6 @@
 class Parser {
 public:
 	Parser();
-	Parser(const Parser& orig);
 	virtual ~Parser();
 private:
 
