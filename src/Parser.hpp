@@ -18,7 +18,7 @@ public:
 private:
 	Parser();
 	virtual ~Parser();
-	std::list<IOperand*>			_operands;
+	std::stack<IOperand*>			_operands;
 };
 
 #endif	/* PARSER_HPP */

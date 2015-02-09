@@ -26,7 +26,7 @@ App::~App()
 {
 }
 
-int	App::run()
+int	App::run() const
 {
 std::ifstream					ofs;
 std::vector<std::string> 		vector;
@@ -47,7 +47,7 @@ if (_ac < 2)
 else
 {
 	while (i < _ac)
-		{
+	{
 		ofs.open(_av[i]);
 		if (ofs.is_open())
 			{
@@ -57,7 +57,7 @@ else
 			ofs.close();
 			}
 		i++;
-		}
+	}
 }
 return (0);
 }

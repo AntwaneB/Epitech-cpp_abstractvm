@@ -19,7 +19,7 @@ public:
 	App(int, char**);
 	~App();
 
-	int	run(void);
+	int	run(void) const;
 
 private:
 	int		_ac;
