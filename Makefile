@@ -16,13 +16,14 @@ RM		  =  rm -f
 MKDIR		  =  mkdir -p
 
 SRCS_DIR	  =  src
-SRCS		  =  main.cpp
+SRCS		  =  main.cpp \
+		     App.cpp
 
 OBJS_DIR	  =  obj
 OBJS		  =  $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
 
 INCS_DIR	  =  inc
-INCS		  =  
+INCS		  =  App.hpp
 
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
