@@ -9,7 +9,7 @@
 #define	PARSER_HPP
 
 #include <vector>
-#include <list>
+#include <stack>
 #include "IOperand.hpp"
 
 class Parser {
