@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <stack>
+#include <string>
 #include "IOperand.hpp"
 
 class Parser {

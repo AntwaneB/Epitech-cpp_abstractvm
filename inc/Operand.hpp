@@ -340,7 +340,7 @@ IOperand*		Operand<T>::createOperand(const std::string & value)
 	long					vI;
 	double				vD;
 	std::stringstream	ss;
-	ss = value;
+	ss << value;
 	ss >> vI;
 	ss >> vD;
 
@@ -363,8 +363,9 @@ template <typename T>
 IOperand*	Operand<T>::createInt8(const std::string & value)
 {
 	short					v;
-	std::stringstream	ss = value;
-	value >> v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
 
 	return (new Operand<short>(Int8, v));
 }
@@ -373,8 +374,9 @@ template <typename T>
 IOperand*	Operand<T>::createInt16(const std::string & value)
 {
 	int					v;
-	std::stringstream	ss = value;
-	value >> v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
 
 	return (new Operand<int>(Int16, v));
 }
@@ -383,8 +385,9 @@ template <typename T>
 IOperand*	Operand<T>::createInt32(const std::string & value)
 {
 	long					v;
-	std::stringstream	ss = value;
-	value >> v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
 
 	return (new Operand<long>(Int32, v));
 }
@@ -393,8 +396,9 @@ template <typename T>
 IOperand*	Operand<T>::createFloat(const std::string & value)
 {
 	float					v;
-	std::stringstream	ss = value;
-	value >> v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
 
 	return (new Operand<float>(Float, v));
 }
@@ -403,8 +407,9 @@ template <typename T>
 IOperand*	Operand<T>::createDouble(const std::string & value)
 {
 	double				v;
-	std::stringstream	ss = value;
-	value >> v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
 
 	return (new Operand<double>(Double, v));
 }
