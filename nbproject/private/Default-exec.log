@@ -1,0 +1,39 @@
+called: g++
+	/home/buchse_a/Projects/cpp_abstractvm
+	g++
+	-I./inc
+	-Wall
+	-Wextra
+	-W
+	-Werror
+	-c
+	-o
+	obj/main.o
+	src/main.cpp
+
+called: g++
+	/home/buchse_a/Projects/cpp_abstractvm
+	g++
+	-I./inc
+	-Wall
+	-Wextra
+	-W
+	-Werror
+	-c
+	-o
+	obj/App.o
+	src/App.cpp
+
+called: g++
+	/home/buchse_a/Projects/cpp_abstractvm
+	g++
+	-I./inc
+	-Wall
+	-Wextra
+	-W
+	-Werror
+	-c
+	-o
+	obj/Operand.o
+	src/Operand.cpp
+

@@ -5,7 +5,7 @@
 ## Login   <buchse_a@epitech.net>
 ##
 ## Started on  Fri Feb  6 11:34:26 2015 Antoine Buchser
-## Last update Fri Feb  6 11:34:28 2015 Antoine Buchser
+## Last update Mon Feb  9 13:36:15 2015 Antoine Buchser
 ##
 
 CC		  =  g++
@@ -17,13 +17,18 @@ MKDIR		  =  mkdir -p
 
 SRCS_DIR	  =  src
 SRCS		  =  main.cpp \
-		     App.cpp
+		     App.cpp \
+		     Parser.cpp
 
 OBJS_DIR	  =  obj
 OBJS		  =  $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
 
 INCS_DIR	  =  inc
-INCS		  =  App.hpp
+INCS		  =  TypeException.hpp \
+		     App.hpp \
+		     IOperand.hpp \
+		     Operand.hpp \
+		     Parser.hpp
 
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 

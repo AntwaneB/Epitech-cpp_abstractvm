@@ -1,1 +1,246 @@
-make: *** No rule to make target `obj/main.o', needed by `abstractvm'.  Stop.
+g++ -I./inc -Wall -Wextra -W -Werror -c -o obj/main.o src/main.cpp
+g++ -I./inc -Wall -Wextra -W -Werror -c -o obj/App.o src/App.cpp
+g++ -I./inc -Wall -Wextra -W -Werror -c -o obj/Operand.o src/Operand.cpp
+src/Operand.cpp:12:1: error: invalid use of template-name ‘Operand’ without an argument list
+ Operand::Operand()
+ ^
+src/Operand.cpp:16:1: error: invalid use of template-name ‘Operand’ without an argument list
+ Operand::~Operand()
+ ^
+src/Operand.cpp:20:21: error: ‘template<class T> class Operand’ used without template parameters
+ std::string const & Operand::toString()
+                     ^
+src/Operand.cpp: In function ‘const string& toString()’:
+src/Operand.cpp:22:2: error: ‘stringstream’ was not declared in this scope
+  stringstream ss;
+  ^
+src/Operand.cpp:22:2: note: suggested alternative:
+In file included from /usr/include/c++/4.8/ios:38:0,
+                 from /usr/include/c++/4.8/istream:38,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from src/Operand.cpp:9:
+/usr/include/c++/4.8/iosfwd:151:37: note:   ‘std::stringstream’
+   typedef basic_stringstream<char>  stringstream;
+                                     ^
+src/Operand.cpp:22:15: error: expected ‘;’ before ‘ss’
+  stringstream ss;
+               ^
+src/Operand.cpp:23:2: error: ‘ss’ was not declared in this scope
+  ss << _val;
+  ^
+src/Operand.cpp:23:8: error: ‘_val’ was not declared in this scope
+  ss << _val;
+        ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:27:5: error: ‘template<class T> class Operand’ used without template parameters
+ int Operand::getPrecision()
+     ^
+src/Operand.cpp: In function ‘int getPrecision()’:
+src/Operand.cpp:29:10: error: ‘_type’ was not declared in this scope
+  return (_type);
+          ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:32:14: error: ‘template<class T> class Operand’ used without template parameters
+ eOperandType Operand::getType()
+              ^
+src/Operand.cpp: In function ‘eOperandType getType()’:
+src/Operand.cpp:34:10: error: ‘_type’ was not declared in this scope
+  return (_type);
+          ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:37:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::operator+(const IOperand & rhs)
+           ^
+src/Operand.cpp: In function ‘IOperand* operator+(const IOperand&)’:
+src/Operand.cpp:40:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:37:11: error: unused parameter ‘rhs’ [-Werror=unused-parameter]
+ IOperand* Operand::operator+(const IOperand & rhs)
+           ^
+src/Operand.cpp:42:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::operator-(const IOperand & rhs)
+           ^
+src/Operand.cpp: In function ‘IOperand* operator-(const IOperand&)’:
+src/Operand.cpp:45:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:42:11: error: unused parameter ‘rhs’ [-Werror=unused-parameter]
+ IOperand* Operand::operator-(const IOperand & rhs)
+           ^
+src/Operand.cpp:47:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::operator*(const IOperand & rhs)
+           ^
+src/Operand.cpp: In function ‘IOperand* operator*(const IOperand&)’:
+src/Operand.cpp:50:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:47:11: error: unused parameter ‘rhs’ [-Werror=unused-parameter]
+ IOperand* Operand::operator*(const IOperand & rhs)
+           ^
+src/Operand.cpp:52:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::operator/(const IOperand & rhs)
+           ^
+src/Operand.cpp:52:50: error: ‘IOperand* operator/(const IOperand&)’ must take exactly two arguments
+ IOperand* Operand::operator/(const IOperand & rhs)
+                                                  ^
+src/Operand.cpp:57:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::operator%(const IOperand & rhs)
+           ^
+src/Operand.cpp:57:50: error: ‘IOperand* operator%(const IOperand&)’ must take exactly two arguments
+ IOperand* Operand::operator%(const IOperand & rhs)
+                                                  ^
+src/Operand.cpp:62:12: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand*  Operand::createOperand(const std::string & value)
+            ^
+src/Operand.cpp: In function ‘IOperand* createOperand(const string&)’:
+src/Operand.cpp:64:13: error: ‘template<class T> class Operand’ used without template parameters
+  IOperand* (Operand::*creators[5])(const std::string &);
+             ^
+src/Operand.cpp:64:22: error: expected unqualified-id before ‘*’ token
+  IOperand* (Operand::*creators[5])(const std::string &);
+                      ^
+src/Operand.cpp:64:22: error: expected ‘)’ before ‘*’ token
+src/Operand.cpp:64:22: error: expected initializer before ‘*’ token
+src/Operand.cpp:66:2: error: ‘creators’ was not declared in this scope
+  creators[Int8] = &Operand::createInt8;
+  ^
+src/Operand.cpp:66:20: error: ‘template<class T> class Operand’ used without template parameters
+  creators[Int8] = &Operand::createInt8;
+                    ^
+src/Operand.cpp:67:21: error: ‘template<class T> class Operand’ used without template parameters
+  creators[Int16] = &Operand::createInt16;
+                     ^
+src/Operand.cpp:68:21: error: ‘template<class T> class Operand’ used without template parameters
+  creators[Int32] = &Operand::createInt32;
+                     ^
+src/Operand.cpp:69:21: error: ‘template<class T> class Operand’ used without template parameters
+  creators[Float] = &Operand::createFloat;
+                     ^
+src/Operand.cpp:70:22: error: ‘template<class T> class Operand’ used without template parameters
+  creators[Double] = &Operand::createDouble;
+                      ^
+src/Operand.cpp:75:2: error: ‘stringstream’ was not declared in this scope
+  stringstream ss;
+  ^
+src/Operand.cpp:75:2: note: suggested alternative:
+In file included from /usr/include/c++/4.8/ios:38:0,
+                 from /usr/include/c++/4.8/istream:38,
+                 from /usr/include/c++/4.8/sstream:38,
+                 from src/Operand.cpp:9:
+/usr/include/c++/4.8/iosfwd:151:37: note:   ‘std::stringstream’
+   typedef basic_stringstream<char>  stringstream;
+                                     ^
+src/Operand.cpp:75:15: error: expected ‘;’ before ‘ss’
+  stringstream ss;
+               ^
+src/Operand.cpp:76:2: error: ‘ss’ was not declared in this scope
+  ss = value;
+  ^
+src/Operand.cpp:81:11: error: invalid use of ‘this’ in non-member function
+   return (this->createInt8(value));
+           ^
+src/Operand.cpp:83:11: error: invalid use of ‘this’ in non-member function
+   return (this->createInt16(value));
+           ^
+src/Operand.cpp:85:11: error: invalid use of ‘this’ in non-member function
+   return (this->createInt32(value));
+           ^
+src/Operand.cpp:86:29: error: ‘FLT_MIN’ was not declared in this scope
+  else if (vD != vI && vD >= FLT_MIN && vD <= FLT_MAX)
+                             ^
+src/Operand.cpp:86:46: error: ‘FLT_MAX’ was not declared in this scope
+  else if (vD != vI && vD >= FLT_MIN && vD <= FLT_MAX)
+                                              ^
+src/Operand.cpp:87:11: error: invalid use of ‘this’ in non-member function
+   return (this->createFloat(value));
+           ^
+src/Operand.cpp:88:29: error: ‘DBL_MIN’ was not declared in this scope
+  else if (vD != vI && vD >= DBL_MIN && vD <= DBL_MAX)
+                             ^
+src/Operand.cpp:88:46: error: ‘DBL_MAX’ was not declared in this scope
+  else if (vD != vI && vD >= DBL_MIN && vD <= DBL_MAX)
+                                              ^
+src/Operand.cpp:89:11: error: invalid use of ‘this’ in non-member function
+   return (this->createDouble(value));
+           ^
+src/Operand.cpp:91:37: error: ‘TypeException’ was not declared in this scope
+   throw TypeException("Invalid type");
+                                     ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:94:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::createInt8(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘IOperand* createInt8(const string&)’:
+src/Operand.cpp:97:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:94:11: error: unused parameter ‘value’ [-Werror=unused-parameter]
+ IOperand* Operand::createInt8(const std::string & value)
+           ^
+src/Operand.cpp:99:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::createInt16(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘IOperand* createInt16(const string&)’:
+src/Operand.cpp:102:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:99:11: error: unused parameter ‘value’ [-Werror=unused-parameter]
+ IOperand* Operand::createInt16(const std::string & value)
+           ^
+src/Operand.cpp:104:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::createInt32(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘IOperand* createInt32(const string&)’:
+src/Operand.cpp:107:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:104:11: error: unused parameter ‘value’ [-Werror=unused-parameter]
+ IOperand* Operand::createInt32(const std::string & value)
+           ^
+src/Operand.cpp:109:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::createFloat(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘IOperand* createFloat(const string&)’:
+src/Operand.cpp:112:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:109:11: error: unused parameter ‘value’ [-Werror=unused-parameter]
+ IOperand* Operand::createFloat(const std::string & value)
+           ^
+src/Operand.cpp:114:11: error: ‘template<class T> class Operand’ used without template parameters
+ IOperand* Operand::createDouble(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘IOperand* createDouble(const string&)’:
+src/Operand.cpp:117:1: error: no return statement in function returning non-void [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: At global scope:
+src/Operand.cpp:114:11: error: unused parameter ‘value’ [-Werror=unused-parameter]
+ IOperand* Operand::createDouble(const std::string & value)
+           ^
+src/Operand.cpp: In function ‘const string& toString()’:
+src/Operand.cpp:25:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: In function ‘int getPrecision()’:
+src/Operand.cpp:30:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: In function ‘eOperandType getType()’:
+src/Operand.cpp:35:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+src/Operand.cpp: In function ‘IOperand* createOperand(const string&)’:
+src/Operand.cpp:92:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1plus: all warnings being treated as errors
+gmake: *** [obj/Operand.o] Error 1

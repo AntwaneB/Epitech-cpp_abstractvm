@@ -8,12 +8,14 @@
         <in>App.hpp</in>
         <in>IOperand.hpp</in>
         <in>Operand.hpp</in>
+        <in>Parser.hpp</in>
+        <in>TypeException.hpp</in>
+      </df>
+      <df name="obj">
       </df>
       <df name="src">
         <in>App.cpp</in>
-        <in>Operand.cpp</in>
         <in>Parser.cpp</in>
-        <in>Parser.hpp</in>
         <in>main.cpp</in>
       </df>
     </df>
