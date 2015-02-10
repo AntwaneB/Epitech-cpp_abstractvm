@@ -5,7 +5,7 @@
 ## Login   <buchse_a@epitech.net>
 ##
 ## Started on  Fri Feb  6 11:34:26 2015 Antoine Buchser
-## Last update Tue Feb 10 12:45:54 2015 Antoine Buchser
+## Last update Tue Feb 10 15:13:44 2015 Antoine Buchser
 ##
 
 CC		  =  clang++
@@ -33,7 +33,7 @@ INCS		  =  Exception.hpp \
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
 CFLAGS		  += -I./inc
-CFLAGS		  += -Wall -Wextra -W -Werror
+CFLAGS		  += -Wall -Wextra -W -Werror -g
 
 $(NAME):	     $(OBJS)
 		     $(CC) $(OBJS) $(CFLAGS) -o $(NAME)

@@ -81,9 +81,9 @@ void	Parser::parse(std::vector<std::string> const & content)
 				std::cout << j << ". " << parts[j] << std::endl;
 			std::cout << std::endl;
 			*/
-			if (operations.find(parts[0]) != operations.end())
+			if (!parts.empty() && operations.find(parts[0]) != operations.end())
 				(this->*(operations.find(parts[0])->second))(parts);
-			else
+			else if (!parts.empty() && operations.find(parts[0]) == operations.end())
 				throw ParserException("Invalid operations");
 		}
 	}
@@ -93,7 +93,18 @@ void	Parser::parse(std::vector<std::string> const & content)
 
 void	Parser::push(std::vector<std::string> const & s)
 {
-	(void)s;
+	if (s[1] == "int8")
+		_operands.push_front(Parser::createOperand(Int8, s[2]));
+	else if (s[1] == "int16")
+		_operands.push_front(Parser::createOperand(Int16, s[2]));
+	else if (s[1] == "int32")
+		_operands.push_front(Parser::createOperand(Int32, s[2]));
+	else if (s[1] == "float")
+		_operands.push_front(Parser::createOperand(Float, s[2]));
+	else if (s[1] == "double")
+		_operands.push_front(Parser::createOperand(Double, s[2]));
+	else
+		throw ParserException("Pushing invalid type");
 }
 
 void	Parser::pop(std::vector<std::string> const & s)
@@ -107,9 +118,9 @@ void	Parser::pop(std::vector<std::string> const & s)
 void	Parser::dump(std::vector<std::string> const & s)
 {
 	(void)s;
-	for (std::list<std::string>::iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
+	for (std::list<IOperand*>::iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
 	{
-    	std::cout << (*it) << std::endl;
+    	std::cout << (*it)->toString() << std::endl;
 	}
 }
 
@@ -159,4 +170,87 @@ void	Parser::exit(std::vector<std::string> const & s)
 	(void)s;
 	_operands.clear();
 	throw ExitException("Exiting program normally");
+}
+
+IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
+{
+	(void)type;
+	IOperand*	(Parser::*creators[5])(const std::string &);
+
+	creators[Int8]		= &Parser::createInt8;
+	creators[Int16]	= &Parser::createInt16;
+	creators[Int32]	= &Parser::createInt32;
+	creators[Float]	= &Parser::createFloat;
+	creators[Double]	= &Parser::createDouble;
+
+	long					vI;
+	double				vD;
+	std::stringstream	ss;
+	ss << value;
+	ss >> vI;
+	ss >> vD;
+
+	if (vD == vI && vI >= SHRT_MIN && vI <= SHRT_MAX)
+		return ((this->*creators[Int8])(value));
+	else if (vD == vI && vI >= INT_MIN && vI <= INT_MAX)
+		return ((this->*creators[Int16])(value));
+	else if (vD == vI && vI >= LONG_MIN && vI <= LONG_MAX)
+		return ((this->*creators[Int32])(value));
+	else if (vD != vI && value.size() - value.find(".") + 1 <= 6)
+		return ((this->*creators[Float])(value));
+	else if (vD != vI && value.size() - value.find(".") + 1 > 6)
+		return ((this->*creators[Double])(value));
+	else
+		throw TypeException("Invalid type");
+	return (NULL);
+}
+
+IOperand*	Parser::createInt8(const std::string & value)
+{
+	short					v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
+
+	return (new Operand<short>(Int8, v));
+}
+
+IOperand*	Parser::createInt16(const std::string & value)
+{
+	int					v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
+
+	return (new Operand<int>(Int16, v));
+}
+
+IOperand*	Parser::createInt32(const std::string & value)
+{
+	long					v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
+
+	return (new Operand<long>(Int32, v));
+}
+
+IOperand*	Parser::createFloat(const std::string & value)
+{
+	float					v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
+
+	return (new Operand<float>(Float, v));
+}
+
+IOperand*	Parser::createDouble(const std::string & value)
+{
+	double				v;
+	std::stringstream	ss;
+	ss << value;
+	ss >> v;
+
+	return (new Operand<double>(Double, v));
 }
