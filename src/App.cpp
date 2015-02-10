@@ -38,7 +38,7 @@ int	App::run() const
 	{
 		while (save != ";;")
 		{
-			std::cin >> save;
+			getline(std::cin, save);
 			vector.push_back(save);
 		}
 		if (save == ";;")
