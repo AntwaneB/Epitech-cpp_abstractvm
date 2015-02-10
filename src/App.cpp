@@ -28,36 +28,36 @@ App::~App()
 
 int	App::run() const
 {
-std::ifstream					ofs;
-std::vector<std::string> 		vector;
-std::string 					save;
-int								i;
+	std::ifstream					ofs;
+	std::vector<std::string> 	vector;
+	std::string 					save;
+	int								i;
 
-i = 1;
-if (_ac < 2)
-{
-	while (save != ";;")
+	i = 1;
+	if (_ac < 2)
 	{
-		std::cin >> save;
-		vector.push_back(save);
-	}
-	if (save == ";;")
-		Parser::parse(vector);
-}
-else
-{
-	while (i < _ac)
-	{
-		ofs.open(_av[i]);
-		if (ofs.is_open())
-			{
-			for(std::string line; getline(ofs, line);)
-				vector.push_back(line);
+		while (save != ";;")
+		{
+			std::cin >> save;
+			vector.push_back(save);
+		}
+		if (save == ";;")
 			Parser::parse(vector);
-			ofs.close();
-			}
-		i++;
 	}
-}
-return (0);
+	else
+	{
+		while (i < _ac)
+		{
+			ofs.open(_av[i]);
+			if (ofs.is_open())
+				{
+				for(std::string line; getline(ofs, line);)
+					vector.push_back(line);
+				Parser::parse(vector);
+				ofs.close();
+				}
+			i++;
+		}
+	}
+	return (0);
 }

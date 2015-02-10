@@ -13,13 +13,27 @@
 #include <string>
 #include "IOperand.hpp"
 
-class Parser {
+class Parser
+{
 public:
-	static void	parse(std::vector<std::string>);
-private:
 	Parser();
-	virtual ~Parser();
-	std::stack<IOperand*>			_operands;
+	~Parser();
+	static void	parse(std::vector<std::string> const &);
+
+	void	push(std::string const &);
+	void	pop(std::string const &);
+	void	dump(std::string const &);
+	void	assert(std::string const &);
+	void	add(std::string const &);
+	void	sub(std::string const &);
+	void	mul(std::string const &);
+	void	div(std::string const &);
+	void	mod(std::string const &);
+	void	print(std::string const &);
+	void	exit(std::string const &);
+
+private:
+	std::stack<IOperand*>	_operands;
 };
 
 #endif	/* PARSER_HPP */
