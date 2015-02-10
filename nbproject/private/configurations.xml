@@ -11,13 +11,12 @@
         <in>Operand.hpp</in>
         <in>Parser.hpp</in>
       </df>
-      <df name="obj">
-      </df>
       <df name="src">
         <in>App.cpp</in>
         <in>Parser.cpp</in>
         <in>main.cpp</in>
       </df>
+      <in>CheckList</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

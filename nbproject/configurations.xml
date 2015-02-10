@@ -6,6 +6,7 @@
         <in>App.cpp</in>
         <in>main.cpp</in>
       </df>
+      <in>CheckList</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -42,6 +43,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="CheckList" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/App.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
