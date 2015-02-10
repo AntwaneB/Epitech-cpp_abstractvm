@@ -75,12 +75,6 @@ void	Parser::parse(std::vector<std::string> const & content)
 		if (!content[i].empty())
 		{
 			std::vector<std::string>	parts = Parser::strtovec(content[i], " ();");
-			/*
-			std::cout << "'" << content[i] << "' line :" << std::endl;
-			for (size_t j = 0; j < parts.size(); j++)
-				std::cout << j << ". " << parts[j] << std::endl;
-			std::cout << std::endl;
-			*/
 			if (!parts.empty() && operations.find(parts[0]) != operations.end())
 				(this->*(operations.find(parts[0])->second))(parts);
 			else if (!parts.empty() && operations.find(parts[0]) == operations.end())
@@ -179,7 +173,7 @@ void	Parser::div(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to div elements from a empty stack");
+		throw StackException("Trying to div elements from an empty stack");
 	if (_operands.size() < 2)
 		throw StackException("Trying to div two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
@@ -193,7 +187,7 @@ void	Parser::mod(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to mod elements from a empty stack");
+		throw StackException("Trying to mod elements from an empty stack");
 	if (_operands.size() < 2)
 		throw StackException("Trying to mod two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
@@ -206,6 +200,15 @@ void	Parser::mod(std::vector<std::string> const & s)
 void	Parser::print(std::vector<std::string> const & s)
 {
 	(void)s;
+	if (_operands.empty())
+		throw StackException("Trying to print element from an empty stack");
+	if (_operands.front()->getType() != Int8)
+		throw TypeException("Invalid type for print operation");
+	int c;
+	std::stringstream ss;
+	ss << _operands.front()->toString();
+	ss >> c;
+	std::cout << static_cast<char>(c) << std::endl;
 }
 
 void	Parser::exit(std::vector<std::string> const & s)
@@ -217,7 +220,7 @@ void	Parser::exit(std::vector<std::string> const & s)
 
 IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
 {
-	(void)type;
+	//(void)type;
 	IOperand*	(Parser::*creators[5])(const std::string &);
 
 	creators[Int8]		= &Parser::createInt8;
@@ -233,6 +236,10 @@ IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
 	ss >> vI;
 	ss >> vD;
 
+	if (type > Double)
+		throw TypeException("Invalid type");
+	return ((this->*creators[type])(value));
+	/*
 	if (vD == vI && vI >= SHRT_MIN && vI <= SHRT_MAX)
 		return ((this->*creators[Int8])(value));
 	else if (vD == vI && vI >= INT_MIN && vI <= INT_MAX)
@@ -245,6 +252,7 @@ IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
 		return ((this->*creators[Double])(value));
 	else
 		throw TypeException("Invalid type");
+	*/
 	return (NULL);
 }
 
