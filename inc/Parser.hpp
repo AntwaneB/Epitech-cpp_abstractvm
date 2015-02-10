@@ -9,14 +9,13 @@
 #define	PARSER_HPP
 
 #include <vector>
-#include <stack>
+#include <list>
 #include <string>
 #include "IOperand.hpp"
 
 class Parser
 {
 public:
-	Parser();
 	~Parser();
 	static void	parse(std::vector<std::string> const &);
 
@@ -35,8 +34,10 @@ public:
 	static std::vector<std::string>	strtovec(std::string const &, std::string const &);
 	static bool								inStr(char const c, std::string const & str);
 
+	static std::list<IOperand*>	_operands;
+
 private:
-	std::stack<IOperand*>	_operands;
+	Parser();
 };
 
 #endif	/* PARSER_HPP */

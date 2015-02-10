@@ -12,6 +12,8 @@
 #include "Parser.hpp"
 #include "Operand.hpp"
 
+std::list<IOperand*>	Parser::_operands;
+
 Parser::Parser()
 {
 }
@@ -81,6 +83,8 @@ void	Parser::parse(std::vector<std::string> const & content)
 			std::cout << std::endl;
 		}
 	}
+	Parser::_operands.clear();
+	throw ParserException("Exiting programm, missing exit instruction");
 }
 
 void	Parser::push(std::vector<std::string> const & s)
@@ -91,7 +95,9 @@ void	Parser::push(std::vector<std::string> const & s)
 void	Parser::pop(std::vector<std::string> const & s)
 {
 	(void)s;
-	
+	if (Parser::_operands.empty())
+		throw StackException("Trying to remove an element from a empty stack");
+	Parser::_operands.pop_front();
 }
 
 void	Parser::dump(std::vector<std::string> const & s)
@@ -145,5 +151,6 @@ void	Parser::print(std::vector<std::string> const & s)
 void	Parser::exit(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	Parser::_operands.clear();
+	throw ExitException("Exiting program normally");
 }

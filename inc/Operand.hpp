@@ -12,7 +12,7 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include "TypeException.hpp"
+#include "Exception.hpp"
 #include "IOperand.hpp"
 
 template<typename T>
