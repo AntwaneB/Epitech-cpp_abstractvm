@@ -32,6 +32,7 @@ int	App::run() const
 	std::vector<std::string> 	vector;
 	std::string 					save;
 	int								i;
+	Parser							parser;
 
 	i = 1;
 	if (_ac < 2)
@@ -42,7 +43,7 @@ int	App::run() const
 			vector.push_back(save);
 		}
 		if (save == ";;")
-			Parser::parse(vector);
+			parser.parse(vector);
 	}
 	else
 	{
@@ -53,7 +54,7 @@ int	App::run() const
 				{
 				for(std::string line; getline(ofs, line);)
 					vector.push_back(line);
-				Parser::parse(vector);
+				parser.parse(vector);
 				ofs.close();
 				}
 			i++;

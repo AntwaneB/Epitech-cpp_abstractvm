@@ -5,10 +5,10 @@
 ## Login   <buchse_a@epitech.net>
 ##
 ## Started on  Fri Feb  6 11:34:26 2015 Antoine Buchser
-## Last update Tue Feb 10 12:21:08 2015 Antoine Buchser
+## Last update Tue Feb 10 12:45:54 2015 Antoine Buchser
 ##
 
-CC		  =  g++
+CC		  =  clang++
 
 NAME		  =  abstractvm
 

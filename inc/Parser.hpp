@@ -16,8 +16,9 @@
 class Parser
 {
 public:
+	Parser();
 	~Parser();
-	static void	parse(std::vector<std::string> const &);
+	void	parse(std::vector<std::string> const &);
 
 	void	push(std::vector<std::string> const &);
 	void	pop(std::vector<std::string> const &);
@@ -34,10 +35,8 @@ public:
 	static std::vector<std::string>	strtovec(std::string const &, std::string const &);
 	static bool								inStr(char const c, std::string const & str);
 
-	static std::list<IOperand*>	_operands;
-
 private:
-	Parser();
+	std::list<IOperand*>	_operands;
 };
 
 #endif	/* PARSER_HPP */
