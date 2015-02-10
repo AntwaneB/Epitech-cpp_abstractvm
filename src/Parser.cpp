@@ -107,13 +107,15 @@ void	Parser::pop(std::vector<std::string> const & s)
 void	Parser::dump(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	for (std::list<std::string>::iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
+	{
+    	std::cout << (*it) << std::endl;
+	}
 }
 
 void	Parser::assert(std::vector<std::string> const & s)
 {
 	(void)s;
-
 }
 
 void	Parser::add(std::vector<std::string> const & s)
