@@ -9,7 +9,6 @@
 #include <map>
 #include <iostream>
 #include <string>
-#include <string.h>
 #include "Parser.hpp"
 #include "Operand.hpp"
 
@@ -21,7 +20,40 @@ Parser::~Parser()
 {
 }
 
-void	Parser::parse(std::vector<std::string> const & v)
+bool	Parser::inStr(char const c, std::string const & str)
+{
+	for (size_t i = 0; i < str.size(); i++)
+		if (str[i] == c)
+			return (true);
+	return (false);
+}
+
+std::vector<std::string>		Parser::strtovec(std::string const & str, std::string const & delim)
+{
+	std::vector<std::string>	res;
+
+	std::string	tmp = "";
+	size_t		len = str.size();
+	for (size_t i = 0; i < len; i++)
+	{
+		if (Parser::inStr(str[i], delim))
+		{
+			if (!tmp.empty())
+			res.push_back(tmp);
+			tmp.clear();
+		}
+		else
+			tmp += str[i];
+		if (str[i] == ';')
+			break;
+	}
+	if (!tmp.empty())
+		res.push_back(tmp);
+
+	return (res);
+}
+
+void	Parser::parse(std::vector<std::string> const & content)
 {
 	std::map<std::string, void (Parser::*)(std::string const &)>	operations;
 
@@ -37,15 +69,17 @@ void	Parser::parse(std::vector<std::string> const & v)
 	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("print", &Parser::print));
 	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("exit", &Parser::exit));
 
-	for(std::vector<std::string>::const_iterator i = v.begin(); i != v.end(); ++i)
+	size_t	len = content.size();
+	for (size_t i = 0; i < len; i++)
 	{
-		char*	str = strdup(*i->c_str());
-		std::vector<std::string>	parts;
-		for (char* tok = strtok(str, " ()"); tok != NULL; tok = strtok(NULL, " ()"))
-			parts.insert(std::string(tok));
-		for (size_t j = 0; j < parts.size(); j++)
-			std::cout << "==> " << parts[i] << std::endl;
-		std::cout << *i << std::endl;
+		if (!content[i].empty())
+		{
+			std::vector<std::string>	parts = Parser::strtovec(content[i], " ();");
+			std::cout << "'" << content[i] << "' line :" << std::endl;
+			for (size_t j = 0; j < parts.size(); j++)
+				std::cout << j << ". " << parts[j] << std::endl;
+			std::cout << std::endl;
+		}
 	}
 }
 
