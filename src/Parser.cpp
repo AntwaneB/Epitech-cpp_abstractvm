@@ -140,25 +140,57 @@ void	Parser::add(std::vector<std::string> const & s)
 void	Parser::sub(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	if (_operands.empty())
+		throw StackException("Trying to sub elements from a empty stack");
+	if (_operands.size() < 2)
+		throw StackException("Trying to sub two elements from a stack of one element");
+	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
+	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
+	_operands.erase(0);
+	_operands.erase(1);
+	_operands.push_front(it0 - it1);
 }
 
 void	Parser::mul(std::vector<std::string> const & s)
 {
 	(void)s;
-
+		if (_operands.empty())
+		throw StackException("Trying to mul elements from a empty stack");
+	if (_operands.size() < 2)
+		throw StackException("Trying to mul two elements from a stack of one element");
+	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
+	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
+	_operands.erase(0);
+	_operands.erase(1);
+	_operands.push_front(it0 * it1);
 }
 
 void	Parser::div(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	if (_operands.empty())
+		throw StackException("Trying to div elements from a empty stack");
+	if (_operands.size() < 2)
+		throw StackException("Trying to div two elements from a stack of one element");
+	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
+	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
+	_operands.erase(0);
+	_operands.erase(1);
+	_operands.push_front(it0 / it1);
 }
 
 void	Parser::mod(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	if (_operands.empty())
+		throw StackException("Trying to mod elements from a empty stack");
+	if (_operands.size() < 2)
+		throw StackException("Trying to mod two elements from a stack of one element");
+	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
+	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
+	_operands.erase(0);
+	_operands.erase(1);
+	_operands.push_front(it0 % it1);
 }
 
 void	Parser::print(std::vector<std::string> const & s)
