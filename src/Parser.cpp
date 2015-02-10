@@ -55,19 +55,19 @@ std::vector<std::string>		Parser::strtovec(std::string const & str, std::string 
 
 void	Parser::parse(std::vector<std::string> const & content)
 {
-	std::map<std::string, void (Parser::*)(std::string const &)>	operations;
+	std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>	operations;
 
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("push", &Parser::push));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("pop", &Parser::pop));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("dump", &Parser::dump));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("assert", &Parser::assert));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("add", &Parser::add));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("sub", &Parser::sub));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("mul", &Parser::mul));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("div", &Parser::div));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("mod", &Parser::pop));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("print", &Parser::print));
-	operations.insert(std::map<std::string, void (Parser::*)(std::string const &)>::value_type("exit", &Parser::exit));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("push", &Parser::push));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("pop", &Parser::pop));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("dump", &Parser::dump));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("assert", &Parser::assert));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("add", &Parser::add));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("sub", &Parser::sub));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("mul", &Parser::mul));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("div", &Parser::div));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("mod", &Parser::pop));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("print", &Parser::print));
+	operations.insert(std::map<std::string, void (Parser::*)(std::vector<std::string> const &)>::value_type("exit", &Parser::exit));
 
 	size_t	len = content.size();
 	for (size_t i = 0; i < len; i++)
@@ -83,66 +83,66 @@ void	Parser::parse(std::vector<std::string> const & content)
 	}
 }
 
-void	Parser::push(std::string const & s)
+void	Parser::push(std::vector<std::string> const & s)
 {
 	(void)s;
 }
 
-void	Parser::pop(std::string const & s)
+void	Parser::pop(std::vector<std::string> const & s)
 {
 	(void)s;
-
+	
 }
 
-void	Parser::dump(std::string const & s)
-{
-	(void)s;
-
-}
-
-void	Parser::assert(std::string const & s)
+void	Parser::dump(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::add(std::string const & s)
+void	Parser::assert(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::sub(std::string const & s)
+void	Parser::add(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::mul(std::string const & s)
+void	Parser::sub(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::div(std::string const & s)
+void	Parser::mul(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::mod(std::string const & s)
+void	Parser::div(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::print(std::string const & s)
+void	Parser::mod(std::vector<std::string> const & s)
 {
 	(void)s;
 
 }
 
-void	Parser::exit(std::string const & s)
+void	Parser::print(std::vector<std::string> const & s)
+{
+	(void)s;
+
+}
+
+void	Parser::exit(std::vector<std::string> const & s)
 {
 	(void)s;
 
