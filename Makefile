@@ -33,7 +33,7 @@ INCS		  =  Exception.hpp \
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
 CFLAGS		  += -I./inc
-CFLAGS		  += -Wall -Wextra -W -Werror -g
+CFLAGS		  += -std=c++11 -Wall -Wextra -W -Werror -g
 
 $(NAME):	     $(OBJS)
 		     $(CC) $(OBJS) $(CFLAGS) -o $(NAME)

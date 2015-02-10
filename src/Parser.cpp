@@ -129,9 +129,8 @@ void	Parser::assert(std::vector<std::string> const & s)
 	(void)s;
 	if (_operands.empty())
 		throw StackException("Trying to assert an element from a empty stack");
-	if (s.back() != _operands.front())
-		throw ParserException("The value at the top of the stack is not equal to the one passed
-as parameter");
+	if (s.back() != _operands.front()->toString())
+		throw ParserException("The value at the top of the stack is not equal to the one passed as parameter");
 }
 
 void	Parser::add(std::vector<std::string> const & s)
@@ -143,9 +142,9 @@ void	Parser::add(std::vector<std::string> const & s)
 		throw StackException("Trying to add two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
 	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
-	_operands.erase(0);
-	_operands.erase(1);
-	_operands.push_front(it0 + it1);
+	_operands.erase(it0);
+	_operands.erase(it1);
+	_operands.push_front(*(*it0) + *(*it1));
 }
 
 void	Parser::sub(std::vector<std::string> const & s)
@@ -157,9 +156,9 @@ void	Parser::sub(std::vector<std::string> const & s)
 		throw StackException("Trying to sub two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
 	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
-	_operands.erase(0);
-	_operands.erase(1);
-	_operands.push_front(it0 - it1);
+	_operands.erase(it0);
+	_operands.erase(it1);
+	_operands.push_front(*(*it0) - *(*it1));
 }
 
 void	Parser::mul(std::vector<std::string> const & s)
@@ -171,9 +170,9 @@ void	Parser::mul(std::vector<std::string> const & s)
 		throw StackException("Trying to mul two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
 	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
-	_operands.erase(0);
-	_operands.erase(1);
-	_operands.push_front(it0 * it1);
+	_operands.erase(it0);
+	_operands.erase(it1);
+	_operands.push_front(*(*it0) * *(*it1));
 }
 
 void	Parser::div(std::vector<std::string> const & s)
@@ -185,9 +184,9 @@ void	Parser::div(std::vector<std::string> const & s)
 		throw StackException("Trying to div two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
 	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
-	_operands.erase(0);
-	_operands.erase(1);
-	_operands.push_front(it0 / it1);
+	_operands.erase(it0);
+	_operands.erase(it1);
+	_operands.push_front(*(*it0) / *(*it1));
 }
 
 void	Parser::mod(std::vector<std::string> const & s)
@@ -199,9 +198,9 @@ void	Parser::mod(std::vector<std::string> const & s)
 		throw StackException("Trying to mod two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
 	std::list<IOperand*>::iterator it1 = std::next(_operands.begin(), 1);
-	_operands.erase(0);
-	_operands.erase(1);
-	_operands.push_front(it0 % it1);
+	_operands.erase(it0);
+	_operands.erase(it1);
+	_operands.push_front(*(*it0) % *(*it1));
 }
 
 void	Parser::print(std::vector<std::string> const & s)
