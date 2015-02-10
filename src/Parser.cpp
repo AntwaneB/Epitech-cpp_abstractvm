@@ -88,7 +88,7 @@ void	Parser::parse(std::vector<std::string> const & content)
 		}
 	}
 	_operands.clear();
-	throw ParserException("Exiting programm, missing exit instruction");
+	throw ParserException("Force exiting programm, missing exit instruction");
 }
 
 void	Parser::push(std::vector<std::string> const & s)
@@ -206,7 +206,6 @@ void	Parser::mod(std::vector<std::string> const & s)
 void	Parser::print(std::vector<std::string> const & s)
 {
 	(void)s;
-
 }
 
 void	Parser::exit(std::vector<std::string> const & s)

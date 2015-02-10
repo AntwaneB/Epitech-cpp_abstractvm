@@ -37,10 +37,13 @@ int	App::run() const
 	i = 1;
 	if (_ac < 2)
 	{
-		while (save != ";;")
+		while (save != ";;" && (i == 1 || (save.size() && save.c_str()[0] != '\0')))
 		{
-			getline(std::cin, save);
+			char tmp[500];
+			std::cin.getline(tmp, 500, '\n');
+			save = std::string(tmp);
 			vector.push_back(save);
+			i++;
 		}
 		if (save == ";;")
 			parser.parse(vector);
