@@ -87,6 +87,8 @@ void	Parser::parse(std::vector<std::string> const & content)
 
 void	Parser::push(std::vector<std::string> const & s)
 {
+	if (s.size() != 3)
+		throw ParserException("'push' needs 3 parameters");
 	if (s[1] == "int8")
 		_operands.push_front(Parser::createOperand(Int8, s[2]));
 	else if (s[1] == "int16")
