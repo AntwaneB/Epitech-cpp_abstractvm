@@ -105,13 +105,15 @@ void	Parser::pop(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to remove an element from a empty stack");
+		throw StackException("Trying to remove an element from an empty stack");
 	_operands.pop_front();
 }
 
 void	Parser::dump(std::vector<std::string> const & s)
 {
 	(void)s;
+	if (_operands.empty())
+		throw StackException("Trying to dump elements from an empty stack");
 	for (std::list<IOperand*>::const_iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
 	{
     	std::cout << (*it)->toString() << std::endl;
@@ -122,7 +124,7 @@ void	Parser::assert(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to assert an element from a empty stack");
+		throw StackException("Trying to assert an element from an empty stack");
 	if (s.back() != _operands.front()->toString())
 		throw ParserException("The value at the top of the stack is not equal to the one passed as parameter");
 }
@@ -131,7 +133,7 @@ void	Parser::add(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to add elements from a empty stack");
+		throw StackException("Trying to add elements from an empty stack");
 	if (_operands.size() < 2)
 		throw StackException("Trying to add two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
@@ -145,7 +147,7 @@ void	Parser::sub(std::vector<std::string> const & s)
 {
 	(void)s;
 	if (_operands.empty())
-		throw StackException("Trying to sub elements from a empty stack");
+		throw StackException("Trying to sub elements from an empty stack");
 	if (_operands.size() < 2)
 		throw StackException("Trying to sub two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
@@ -159,7 +161,7 @@ void	Parser::mul(std::vector<std::string> const & s)
 {
 	(void)s;
 		if (_operands.empty())
-		throw StackException("Trying to mul elements from a empty stack");
+		throw StackException("Trying to mul elements from an empty stack");
 	if (_operands.size() < 2)
 		throw StackException("Trying to mul two elements from a stack of one element");
 	std::list<IOperand*>::iterator it0 = std::next(_operands.begin(), 0);
