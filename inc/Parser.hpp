@@ -35,14 +35,14 @@ public:
 	static std::vector<std::string>	strtovec(std::string const &, std::string const &);
 	static bool								inStr(char const c, std::string const & str);
 
-	IOperand*	createOperand(eOperandType type, const std::string & value);
+	IOperand*	createOperand(eOperandType type, const std::string & value) const;
 
 private:
-	IOperand*	createInt8(const std::string & value);
-	IOperand*	createInt16(const std::string & value);
-	IOperand*	createInt32(const std::string & value);
-	IOperand*	createFloat(const std::string & value);
-	IOperand*	createDouble(const std::string & value);
+	IOperand*	createInt8(const std::string & value) const;
+	IOperand*	createInt16(const std::string & value) const;
+	IOperand*	createInt32(const std::string & value) const;
+	IOperand*	createFloat(const std::string & value) const;
+	IOperand*	createDouble(const std::string & value) const;
 
 private:
 	std::list<IOperand*>	_operands;

@@ -26,7 +26,6 @@ public:
 
 	virtual int				getPrecision() const;
 	virtual eOperandType	getType() const;
-	T							getValue();
 
 	virtual IOperand*	operator+(const IOperand & rhs) const;
 	virtual IOperand*	operator-(const IOperand & rhs) const;
@@ -91,17 +90,17 @@ IOperand*	Operand<T>::operator+(const IOperand & rhs) const
 	}
 	else
 	{
-		long v;
+		int v;
 		std::stringstream	ss;
 		ss << rhs.toString();
 		ss >> v;
 
-		if (type == Int32 || (type < Int32 && (v + _val > INT_MAX || v + _val < INT_MIN)))
-			return (new Operand<long>(Int32, v + _val));
-		else if (type == Int16 || (type < Int16 && (v + _val > SHRT_MAX || v + _val < SHRT_MIN)))
-			return (new Operand<int>(Int16, v + _val));
+		if (type == Int32 || (type < Int32 && (v + _val > SHRT_MAX || v + _val < SHRT_MIN)))
+			return (new Operand<int>(Int32, v + _val));
+		else if (type == Int16 || (type < Int16 && (v + _val > SCHAR_MAX || v + _val < SCHAR_MIN)))
+			return (new Operand<short>(Int16, v + _val));
 		else if (type == Int8)
-			return (new Operand<short>(Int8, v + _val));
+			return (new Operand<char>(Int8, v + _val));
 		else
 			throw TypeException("Invalid operand type");
 	}
@@ -128,17 +127,17 @@ IOperand*	Operand<T>::operator-(const IOperand & rhs) const
 	}
 	else
 	{
-		long v;
+		int v;
 		std::stringstream	ss;
 		ss << rhs.toString();
 		ss >> v;
 
-		if (type == Int32 || (type < Int32 && (v - _val > INT_MAX || v - _val < INT_MIN)))
-			return (new Operand<long>(Int32, v - _val));
-		else if (type == Int16 || (type < Int16 && (v - _val > SHRT_MAX || v - _val < SHRT_MIN)))
-			return (new Operand<int>(Int16, v - _val));
+		if (type == Int32 || (type < Int32 && (v - _val > SHRT_MAX || v - _val < SHRT_MIN)))
+			return (new Operand<int>(Int32, v - _val));
+		else if (type == Int16 || (type < Int16 && (v - _val > SCHAR_MAX || v - _val < SCHAR_MIN)))
+			return (new Operand<short>(Int16, v - _val));
 		else if (type == Int8)
-			return (new Operand<short>(Int8, v - _val));
+			return (new Operand<char>(Int8, v - _val));
 		else
 			throw TypeException("Invalid operand type");
 	}
@@ -165,17 +164,17 @@ IOperand*	Operand<T>::operator*(const IOperand & rhs) const
 	}
 	else
 	{
-		long v;
+		int v;
 		std::stringstream	ss;
 		ss << rhs.toString();
 		ss >> v;
 
-		if (type == Int32 || (type < Int32 && (v * _val > INT_MAX || v * _val < INT_MIN)))
-			return (new Operand<long>(Int32, v * _val));
-		else if (type == Int16 || (type < Int16 && (v * _val > SHRT_MAX || v * _val < SHRT_MIN)))
-			return (new Operand<int>(Int16, v * _val));
+		if (type == Int32 || (type < Int32 && (v * _val > SHRT_MAX || v * _val < SHRT_MIN)))
+			return (new Operand<int>(Int32, v * _val));
+		else if (type == Int16 || (type < Int16 && (v * _val > SCHAR_MAX || v * _val < SCHAR_MIN)))
+			return (new Operand<short>(Int16, v * _val));
 		else if (type == Int8)
-			return (new Operand<short>(Int8, v * _val));
+			return (new Operand<char>(Int8, v * _val));
 		else
 			throw TypeException("Invalid operand type");
 	}
@@ -202,7 +201,7 @@ IOperand*	Operand<T>::operator/(const IOperand & rhs) const
 	}
 	else
 	{
-		long v;
+		int v;
 		std::stringstream	ss;
 		ss << rhs.toString();
 		ss >> v;
@@ -210,11 +209,11 @@ IOperand*	Operand<T>::operator/(const IOperand & rhs) const
 		if (v == 0)
 			throw TypeException("Division by zero");
 		if (type == Int32)
-			return (new Operand<long>(Int32, v / _val));
+			return (new Operand<int>(Int32, v / _val));
 		else if (type == Int16)
-			return (new Operand<int>(Int16, v / _val));
+			return (new Operand<short>(Int16, v / _val));
 		else if (type == Int8)
-			return (new Operand<short>(Int8, v / _val));
+			return (new Operand<char>(Int8, v / _val));
 		else
 			throw TypeException("Invalid operand type");
 	}
@@ -233,7 +232,7 @@ IOperand*	Operand<T>::operator%(const IOperand & rhs) const
 	}
 	else
 	{
-		long v;
+		int v;
 		std::stringstream	ss;
 		ss << rhs.toString();
 		ss >> v;
@@ -241,11 +240,11 @@ IOperand*	Operand<T>::operator%(const IOperand & rhs) const
 		if (v == 0)
 			throw TypeException("Modulo by zero");
 		if (type == Int32)
-			return (new Operand<long>(Int32, static_cast<long>(v) % static_cast<long>(_val)));
+			return (new Operand<int>(Int32, static_cast<int>(v) % static_cast<int>(_val)));
 		else if (type == Int16)
-			return (new Operand<int>(Int16, static_cast<int>(v) % static_cast<int>(_val)));
+			return (new Operand<short>(Int16, static_cast<short>(v) % static_cast<short>(_val)));
 		else if (type == Int8)
-			return (new Operand<short>(Int8, static_cast<int>(v) % static_cast<short>(_val)));
+			return (new Operand<char>(Int8, static_cast<char>(v) % static_cast<char>(_val)));
 		else
 			throw TypeException("Invalid operand type");
 	}

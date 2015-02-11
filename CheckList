@@ -1,5 +1,5 @@
 - Vérifier les const sur les fonctions et les paramètres
-- Vérifier qu'on passe bien les objets par référence
 - Vérifier la gestion d'erreur
 - Tester toutes les fonctions
-- Passer Int8 en char, Int16 en short, etc...
+V Vérifier qu'on passe bien les objets par référence
+V Passer Int8 en char, Int16 en short, etc...

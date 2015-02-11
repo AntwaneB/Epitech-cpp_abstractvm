@@ -112,7 +112,7 @@ void	Parser::pop(std::vector<std::string> const & s)
 void	Parser::dump(std::vector<std::string> const & s)
 {
 	(void)s;
-	for (std::list<IOperand*>::iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
+	for (std::list<IOperand*>::const_iterator it = Parser::_operands.begin(); it != Parser::_operands.end(); ++it)
 	{
     	std::cout << (*it)->toString() << std::endl;
 	}
@@ -204,11 +204,11 @@ void	Parser::print(std::vector<std::string> const & s)
 		throw StackException("Trying to print element from an empty stack");
 	if (_operands.front()->getType() != Int8)
 		throw TypeException("Invalid type for print operation");
-	int c;
+	char c;
 	std::stringstream ss;
 	ss << _operands.front()->toString();
 	ss >> c;
-	std::cout << static_cast<char>(c) << std::endl;
+	std::cout << c << std::endl;
 }
 
 void	Parser::exit(std::vector<std::string> const & s)
@@ -218,10 +218,9 @@ void	Parser::exit(std::vector<std::string> const & s)
 	throw ExitException("Exiting program normally");
 }
 
-IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
+IOperand*		Parser::createOperand(eOperandType type, const std::string & value) const
 {
-	//(void)type;
-	IOperand*	(Parser::*creators[5])(const std::string &);
+	IOperand*	(Parser::*creators[5])(const std::string &) const;
 
 	creators[Int8]		= &Parser::createInt8;
 	creators[Int16]	= &Parser::createInt16;
@@ -229,7 +228,7 @@ IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
 	creators[Float]	= &Parser::createFloat;
 	creators[Double]	= &Parser::createDouble;
 
-	long					vI;
+	int					vI;
 	double				vD;
 	std::stringstream	ss;
 	ss << value;
@@ -239,54 +238,40 @@ IOperand*		Parser::createOperand(eOperandType type, const std::string & value)
 	if (type > Double)
 		throw TypeException("Invalid type");
 	return ((this->*creators[type])(value));
-	/*
-	if (vD == vI && vI >= SHRT_MIN && vI <= SHRT_MAX)
-		return ((this->*creators[Int8])(value));
-	else if (vD == vI && vI >= INT_MIN && vI <= INT_MAX)
-		return ((this->*creators[Int16])(value));
-	else if (vD == vI && vI >= LONG_MIN && vI <= LONG_MAX)
-		return ((this->*creators[Int32])(value));
-	else if (vD != vI && value.size() - value.find(".") + 1 <= 6)
-		return ((this->*creators[Float])(value));
-	else if (vD != vI && value.size() - value.find(".") + 1 > 6)
-		return ((this->*creators[Double])(value));
-	else
-		throw TypeException("Invalid type");
-	*/
 	return (NULL);
 }
 
-IOperand*	Parser::createInt8(const std::string & value)
+IOperand*	Parser::createInt8(const std::string & value) const
 {
 	short					v;
 	std::stringstream	ss;
 	ss << value;
 	ss >> v;
 
-	return (new Operand<short>(Int8, v));
+	return (new Operand<char>(Int8, v));
 }
 
-IOperand*	Parser::createInt16(const std::string & value)
+IOperand*	Parser::createInt16(const std::string & value) const
 {
 	int					v;
 	std::stringstream	ss;
 	ss << value;
 	ss >> v;
 
-	return (new Operand<int>(Int16, v));
+	return (new Operand<short>(Int16, v));
 }
 
-IOperand*	Parser::createInt32(const std::string & value)
+IOperand*	Parser::createInt32(const std::string & value) const
 {
 	long					v;
 	std::stringstream	ss;
 	ss << value;
 	ss >> v;
 
-	return (new Operand<long>(Int32, v));
+	return (new Operand<int>(Int32, v));
 }
 
-IOperand*	Parser::createFloat(const std::string & value)
+IOperand*	Parser::createFloat(const std::string & value) const
 {
 	float					v;
 	std::stringstream	ss;
@@ -296,7 +281,7 @@ IOperand*	Parser::createFloat(const std::string & value)
 	return (new Operand<float>(Float, v));
 }
 
-IOperand*	Parser::createDouble(const std::string & value)
+IOperand*	Parser::createDouble(const std::string & value) const
 {
 	double				v;
 	std::stringstream	ss;
