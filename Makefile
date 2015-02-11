@@ -5,10 +5,10 @@
 ## Login   <buchse_a@epitech.net>
 ##
 ## Started on  Fri Feb  6 11:34:26 2015 Antoine Buchser
-## Last update Wed Feb 11 12:55:49 2015 Antoine Buchser
+## Last update Wed Feb 11 13:40:14 2015 Antoine Buchser
 ##
 
-CC		  =  clang++
+CC		  =  g++
 
 NAME		  =  abstractvm
 
@@ -33,7 +33,7 @@ INCS		  =  Exception.hpp \
 DEPS		  =  $(patsubst %,$(INCS_DIR)/%,$(INCS))
 
 CFLAGS		  += -I./inc
-CFLAGS		  += -std=c++11 -Wall -Wextra -W -Werror -g
+CFLAGS		  += -std=c++11 -Wall -Wextra -W -Werror
 
 $(NAME):	     $(OBJS)
 		     $(CC) $(OBJS) $(CFLAGS) -o $(NAME)
