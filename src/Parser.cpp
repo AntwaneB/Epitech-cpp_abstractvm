@@ -74,11 +74,11 @@ void	Parser::parse(std::vector<std::string> const & content)
 	{
 		if (!content[i].empty())
 		{
-			std::vector<std::string>	parts = Parser::strtovec(content[i], " ();");
+			std::vector<std::string>	parts = Parser::strtovec(content[i], " ();\t");
 			if (!parts.empty() && operations.find(parts[0]) != operations.end())
 				(this->*(operations.find(parts[0])->second))(parts);
 			else if (!parts.empty() && operations.find(parts[0]) == operations.end())
-				throw ParserException("Invalid operations");
+				throw ParserException("Invalid operation");
 		}
 	}
 	_operands.clear();
